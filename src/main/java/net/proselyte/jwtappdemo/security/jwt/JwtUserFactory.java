@@ -1,0 +1,33 @@
+package net.proselyte.jwtappdemo.security.jwt;
+
+import net.proselyte.jwtappdemo.model.Card;
+import net.proselyte.jwtappdemo.model.Role;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+public final class JwtUserFactory {
+
+    public JwtUserFactory() {
+    }
+
+    public static JwtUser create(Card card) {
+        return new JwtUser(
+                card.getId(),
+                card.getUsername(),
+                card.getPassword(),
+                mapToGrantedAuthorities(new ArrayList<>(card.getRoles()))
+        );
+    }
+
+    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Role> userRoles) {
+        return userRoles.stream()
+                .map(role ->
+                        new SimpleGrantedAuthority(role.getName())
+                ).collect(Collectors.toList());
+    }
+}
