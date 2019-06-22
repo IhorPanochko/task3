@@ -26,13 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Implementation of {@link CardService} interface.
- * Wrapper for {@link CardRepository} + business logic.
- *
- * @author Eugene Suleimanov
- * @version 1.0
- */
+
 
 @Service
 @Slf4j
